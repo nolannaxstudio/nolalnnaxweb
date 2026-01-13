@@ -117,13 +117,13 @@ document.querySelectorAll('.card').forEach(card => {
   fetch(url)
     .then(response => response.text())
     .then(text => {
-      if (/Site not found|page not found/i.test(text)) {
-        statusEl.textContent = "Hors ligne ❌";
-        btnEl.href = "#";
-      } else {
-        statusEl.textContent = "En ligne 🌐";
-        btnEl.href = url;
-      }
+     if (/Site Not Found/i.test(text)) {
+  statusEl.textContent = "Hors ligne ❌";
+  btnEl.href = "#";
+} else {
+  statusEl.textContent = "En ligne 🌐";
+  btnEl.href = url;
+}
     })
     .catch(() => {
       statusEl.textContent = "Hors ligne ❌";
@@ -134,5 +134,6 @@ document.querySelectorAll('.card').forEach(card => {
 
 </body>
 </html>
+
 
 
