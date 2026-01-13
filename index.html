@@ -117,7 +117,7 @@ document.querySelectorAll('.card').forEach(card => {
   fetch(url)
     .then(response => response.text())
     .then(text => {
-      if (/site not found|page not found/i.test(text)) {
+      if (/Site not found|page not found/i.test(text)) {
         statusEl.textContent = "Hors ligne ❌";
         btnEl.href = "#";
       } else {
@@ -134,3 +134,4 @@ document.querySelectorAll('.card').forEach(card => {
 
 </body>
 </html>
+
