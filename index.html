@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nolannax - PortFolio</title>
+<title>Nolannax - Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
@@ -65,75 +65,48 @@
   <div class="card" data-url="https://teampingpongfr.netlify.app/">
     <h3>Team PingPong FR</h3>
     <p>Communauté ping‑pong — actualités & tournois.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://teampingpongfr.netlify.app/" target="_blank">Voir le site</a>
   </div>
 
   <div class="card" data-url="https://numerixa.netlify.app/">
     <h3>Numérixa</h3>
     <p>Cours et exercices de maths pour tous niveaux.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://numerixa.netlify.app/" target="_blank">Voir le site</a>
   </div>
 
   <div class="card" data-url="https://tuneflowradio.netlify.app/">
     <h3>TuneFlow Radio</h3>
     <p>Streaming radio & playlists.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://tuneflowradio.netlify.app/" target="_blank">Voir le site</a>
   </div>
 
   <div class="card" data-url="https://catatracker.netlify.app/">
     <h3>CataTracker</h3>
     <p>Suivi de projets & gestion en temps réel.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://catatracker.netlify.app/" target="_blank">Voir le site</a>
   </div>
 
   <div class="card" data-url="https://retournetoi.netlify.app/">
     <h3>Retournetoi</h3>
     <p>Jeu interactif en ligne.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://retournetoi.netlify.app/" target="_blank">Voir le site</a>
   </div>
 
   <div class="card" data-url="https://nolannaxstudio.netlify.app/">
     <h3>Nolannax Studio</h3>
     <p>Hub jeux & créations numériques.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
+    <div class="status">En ligne 🌐</div>
+    <a class="btn" href="https://nolannaxstudio.netlify.app/" target="_blank">Voir le site</a>
   </div>
 </div>
 
 <footer>© 2025 – Portfolio de mes créations</footer>
 
-<script>
-// Vérification des sites avec détection "Site not found"
-document.querySelectorAll('.card').forEach(card => {
-  const url = card.dataset.url;
-  const statusEl = card.querySelector('.status');
-  const btnEl = card.querySelector('.btn');
-
-  fetch(url)
-    .then(response => response.text())
-    .then(text => {
-     if (/Site Not Found/i.test(text)) {
-  statusEl.textContent = "Hors ligne ❌";
-  btnEl.href = "#";
-} else {
-  statusEl.textContent = "En ligne 🌐";
-  btnEl.href = url;
-}
-    })
-    .catch(() => {
-      statusEl.textContent = "Hors ligne ❌";
-      btnEl.href = "#";
-    });
-});
-</script>
-
+<!-- Pas de JS nécessaire, tous les boutons pointent directement vers les sites -->
 </body>
 </html>
-
-
-
