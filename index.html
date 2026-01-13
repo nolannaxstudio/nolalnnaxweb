@@ -8,19 +8,47 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
   body{background:#0d0d0d;color:white;overflow-x:hidden;}
-  #smoke{position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://i.imgur.com/8fK4h8F.png')repeat;opacity:.25;animation:smokeMove 20s linear infinite;filter:blur(12px);z-index:-2;}
+  
+  /* Smoke background */
+  #smoke{
+    position:absolute;top:0;left:0;width:100%;height:100%;
+    background:url('https://i.imgur.com/8fK4h8F.png') repeat;
+    opacity:.25;animation:smokeMove 20s linear infinite;
+    filter:blur(12px);z-index:-2;
+  }
   @keyframes smokeMove{0%{transform:translate(0)}50%{transform:translate(10%,-10%)}100%{transform:translate(0)}}
-  header{text-align:center;padding:60px 20px;z-index:1;position:relative;}
-  header h1{font-size:3.5rem;text-shadow:0 0 10px #4b4bff,0 0 20px #00d9ff;animation:fadeIn 1.5s ease-in-out;}
+
+  header{text-align:center;padding:60px 20px;position:relative;z-index:1;}
+  header h1{font-size:3.5rem;text-shadow:0 0 10px #4b4bff,0 0 20px #00d9ff;animation:fadeIn 1.5s ease-in-out,glitch 1s infinite;}
   header p{margin-top:10px;opacity:.7;animation:fadeIn 2s ease-in-out;}
   @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  .container{max-width:1100px;margin:auto;padding:40px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;position:relative;z-index:1;}
-  .card{background:#1a1a1a;border-radius:18px;padding:20px;position:relative;overflow:hidden;border:2px solid #4b4bff55;box-shadow:0 0 20px #4b4bff66;transition:.3s;}
-  .card:hover{transform:translateY(-10px);box-shadow:0 0 35px #00d9ff;}
+  @keyframes glitch{0%{text-shadow:2px 0 #4b4bff,-2px 0 #00d9ff;}20%{text-shadow:-2px 0 #4b4bff,2px 0 #00d9ff;}40%{text-shadow:2px 0 #00d9ff,-2px 0 #4b4bff;}60%{text-shadow:-2px 0 #00d9ff,2px 0 #4b4bff;}100%{text-shadow:2px 0 #4b4bff,-2px 0 #00d9ff;}}
+
+  .container{
+    max-width:1100px;margin:auto;padding:40px 20px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;position:relative;z-index:1;
+  }
+
+  .card{
+    background:#1a1a1a;border-radius:18px;padding:20px;position:relative;overflow:hidden;
+    border:2px solid #4b4bff55;box-shadow:0 0 20px #4b4bff66;transition:transform .3s,box-shadow .3s;
+  }
+  .card:hover{
+    transform:translateY(-10px);box-shadow:0 0 35px #00d9ff;
+  }
+  .card::before{
+    content:'';position:absolute;top:-50px;left:-50px;width:120px;height:120px;
+    background:linear-gradient(45deg,#4b4bff,#00d9ff);border-radius:50%;
+    filter:blur(50px);opacity:.4;animation:rotate 8s linear infinite alternate;
+  }
+  @keyframes rotate{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
   .card h3{font-size:1.4rem;margin-bottom:10px;}
+  .card p{opacity:.8;}
   .status{margin-top:8px;font-size:.9rem;opacity:.8;}
   .btn{display:inline-block;margin-top:10px;padding:10px 18px;background:#4b4bff;color:white;border-radius:10px;text-decoration:none;transition:.3s;}
   .btn:hover{background:#00d9ff;}
+
   footer{text-align:center;padding:40px;opacity:.5;margin-top:20px;}
 </style>
 </head>
@@ -75,32 +103,34 @@
     <div class="status">Vérification…</div>
     <a class="btn" href="#" target="_blank">Voir le site</a>
   </div>
-
-   <div class="card" data-url="https://nolannaxstudionn.netlify.app/">
-    <h3>Ntest</h3>
-    <p>Hub jeux & créations numériques.</p>
-    <div class="status">Vérification…</div>
-    <a class="btn" href="#" target="_blank">Voir le site</a>
-  </div>
 </div>
 
 <footer>© 2025 – Portfolio de mes créations</footer>
 
 <script>
-// Pour chaque carte, on teste l’URL rapidement
-document.querySelectorAll('.card').forEach(card=>{
+// Vérification des sites avec détection "Site not found"
+document.querySelectorAll('.card').forEach(card => {
   const url = card.dataset.url;
-  fetch(url, {method:'HEAD', mode:'no-cors'})
-    .then(()=> {
-      card.querySelector('.status').textContent = "En ligne 🌐";
-      card.querySelector('.btn').href = url;
+  const statusEl = card.querySelector('.status');
+  const btnEl = card.querySelector('.btn');
+
+  fetch(url)
+    .then(response => response.text())
+    .then(text => {
+      if (/site not found|page not found/i.test(text)) {
+        statusEl.textContent = "Hors ligne ❌";
+        btnEl.href = "#";
+      } else {
+        statusEl.textContent = "En ligne 🌐";
+        btnEl.href = url;
+      }
     })
-    .catch(()=> {
-      card.querySelector('.status').textContent = "Hors ligne ❌";
+    .catch(() => {
+      statusEl.textContent = "Hors ligne ❌";
+      btnEl.href = "#";
     });
 });
 </script>
 
 </body>
 </html>
-
