@@ -133,51 +133,85 @@ footer{
 
 <div class="container">
 
-  <div class="card">
+  <div class="card" data-url="https://teampingpongfr.netlify.app/">
     <h3>Team PingPong FR</h3>
     <p>Communauté ping‑pong — actualités & tournois.</p>
-    <div class="status">En ligne 🌐</div>
+    <div class="status">Vérification...</div>
     <a class="btn" href="https://teampingpongfr.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card">
+  <div class="card" data-url="https://numerixa.netlify.app/">
     <h3>Numérixa</h3>
     <p>Cours et exercices de maths pour tous niveaux.</p>
-    <div class="status">En ligne 🌐</div>
+    <div class="status">Vérification...</div>
     <a class="btn" href="https://numerixa.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card">
+  <div class="card" data-url="https://tuneflowradio.netlify.app/">
     <h3>TuneFlow Radio</h3>
     <p>Streaming radio & playlists.</p>
-    <div class="status">En ligne 🌐</div>
+    <div class="status">Vérification...</div>
     <a class="btn" href="https://tuneflowradio.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card">
+  <div class="card" data-url="https://catatracker.netlify.app/">
     <h3>CataTracker</h3>
     <p>Suivi de projets & gestion en temps réel.</p>
-    <div class="status">En ligne 🌐</div>
+    <div class="status">Vérification...</div>
     <a class="btn" href="https://catatracker.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card">
+  <div class="card" data-url="">
     <h3>Retournetoi</h3>
     <p>Jeu interactif en ligne.</p>
     <div class="status">Hors ligne ❌</div>
     <a class="btn" href="#">Indisponible</a>
   </div>
 
-  <div class="card">
+  <div class="card" data-url="https://nolannaxstudio.netlify.app/">
     <h3>Nolannax Studio</h3>
     <p>Hub jeux & créations numériques.</p>
-    <div class="status">En ligne 🌐</div>
+    <div class="status">Vérification...</div>
     <a class="btn" href="https://nolannaxstudio.netlify.app/" target="_blank">Visiter</a>
   </div>
 
 </div>
 
 <footer>© 2025 – Nolannax Network • Tous droits réservés</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const url = card.getAttribute("data-url");
+    const status = card.querySelector(".status");
+
+    if (!url) {
+      status.textContent = "Hors ligne ❌";
+      return;
+    }
+
+    fetch(url)
+      .then(res => res.text())
+      .then(html => {
+        if (
+          html.includes("Site not found") ||
+          html.includes("Page not found") ||
+          html.includes("Not Found") ||
+          html.includes("Looks like you followed a broken link")
+        ) {
+          status.textContent = "Hors ligne ❌";
+        } else {
+          status.textContent = "En ligne 🌐";
+        }
+      })
+      .catch(() => {
+        status.textContent = "Hors ligne ❌";
+      });
+  });
+});
+</script>
 
 </body>
 </html>
