@@ -5,112 +5,165 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nolannax - Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-  body{background:#0d0d0d;color:white;overflow-x:hidden;}
-  
-  /* Smoke background */
-  #smoke{
-    position:absolute;top:0;left:0;width:100%;height:100%;
-    background:url('https://i.imgur.com/8fK4h8F.png') repeat;
-    opacity:.25;animation:smokeMove 20s linear infinite;
-    filter:blur(12px);z-index:-2;
+  body{background:#050505;color:white;overflow-x:hidden;}
+
+  /* Background animé */
+  #bg{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:radial-gradient(circle at 20% 20%,#0040ff22,transparent),
+               radial-gradient(circle at 80% 80%,#00eaff22,transparent);
+    filter:blur(40px);
+    animation:moveBg 12s infinite alternate ease-in-out;
+    z-index:-2;
   }
-  @keyframes smokeMove{0%{transform:translate(0)}50%{transform:translate(10%,-10%)}100%{transform:translate(0)}}
+  @keyframes moveBg{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(40px,-40px);}
+  }
 
-  header{text-align:center;padding:60px 20px;position:relative;z-index:1;}
-  header h1{font-size:3.5rem;text-shadow:0 0 10px #4b4bff,0 0 20px #00d9ff;animation:fadeIn 1.5s ease-in-out,glitch 1s infinite;}
-  header p{margin-top:10px;opacity:.7;animation:fadeIn 2s ease-in-out;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes glitch{0%{text-shadow:2px 0 #4b4bff,-2px 0 #00d9ff;}20%{text-shadow:-2px 0 #4b4bff,2px 0 #00d9ff;}40%{text-shadow:2px 0 #00d9ff,-2px 0 #4b4bff;}60%{text-shadow:-2px 0 #00d9ff,2px 0 #4b4bff;}100%{text-shadow:2px 0 #4b4bff,-2px 0 #00d9ff;}}
+  /* Header style Nolannax */
+  header{
+    text-align:center;padding:80px 20px;margin-bottom:20px;
+  }
+  header h1{
+    font-size:4rem;font-weight:600;
+    text-shadow:0 0 15px #0066ff,0 0 30px #00eaff;
+    animation:glitch 1.5s infinite;
+  }
+  header p{
+    margin-top:10px;font-size:1.2rem;opacity:.8;
+  }
 
+  @keyframes glitch{
+    0%{text-shadow:2px 0 #0066ff,-2px 0 #00eaff;}
+    50%{text-shadow:-2px 0 #0066ff,2px 0 #00eaff;}
+    100%{text-shadow:2px 0 #0066ff,-2px 0 #00eaff;}
+  }
+
+  /* Menu */
+  nav{
+    text-align:center;margin-bottom:40px;
+  }
+  nav a{
+    margin:0 15px;color:#00d9ff;text-decoration:none;
+    font-weight:600;transition:.3s;
+  }
+  nav a:hover{
+    color:white;text-shadow:0 0 10px #00d9ff;
+  }
+
+  /* Container */
   .container{
-    max-width:1100px;margin:auto;padding:40px 20px;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;position:relative;z-index:1;
+    max-width:1100px;margin:auto;padding:20px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
   }
 
+  /* Cards */
   .card{
-    background:#1a1a1a;border-radius:18px;padding:20px;position:relative;overflow:hidden;
-    border:2px solid #4b4bff55;box-shadow:0 0 20px #4b4bff66;transition:transform .3s,box-shadow .3s;
+    background:#0f0f0f;border-radius:18px;padding:25px;
+    border:1px solid #00aaff55;
+    box-shadow:0 0 15px #0044ff33;
+    transition:.3s;position:relative;overflow:hidden;
   }
   .card:hover{
-    transform:translateY(-10px);box-shadow:0 0 35px #00d9ff;
+    transform:translateY(-10px);
+    box-shadow:0 0 25px #00eaffaa;
   }
   .card::before{
-    content:'';position:absolute;top:-50px;left:-50px;width:120px;height:120px;
-    background:linear-gradient(45deg,#4b4bff,#00d9ff);border-radius:50%;
-    filter:blur(50px);opacity:.4;animation:rotate 8s linear infinite alternate;
+    content:'';position:absolute;top:-40px;left:-40px;width:120px;height:120px;
+    background:linear-gradient(45deg,#0066ff,#00eaff);
+    opacity:.25;filter:blur(40px);border-radius:50%;
+    animation:rotate 8s infinite linear;
   }
-  @keyframes rotate{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+  @keyframes rotate{to{transform:rotate(360deg);}}
 
-  .card h3{font-size:1.4rem;margin-bottom:10px;}
-  .card p{opacity:.8;}
-  .status{margin-top:8px;font-size:.9rem;opacity:.8;}
-  .btn{display:inline-block;margin-top:10px;padding:10px 18px;background:#4b4bff;color:white;border-radius:10px;text-decoration:none;transition:.3s;}
-  .btn:hover{background:#00d9ff;}
+  .card h3{font-size:1.5rem;margin-bottom:10px;}
+  .card p{opacity:.8;margin-bottom:10px;}
+  .status{font-size:.9rem;opacity:.7;margin-bottom:10px;}
 
-  footer{text-align:center;padding:40px;opacity:.5;margin-top:20px;}
+  .btn{
+    display:inline-block;padding:10px 18px;
+    background:#0066ff;border-radius:10px;
+    color:white;text-decoration:none;font-weight:600;
+    transition:.3s;
+  }
+  .btn:hover{
+    background:#00eaff;color:black;
+  }
+
+  footer{
+    text-align:center;padding:40px;margin-top:40px;
+    opacity:.6;font-size:.9rem;
+  }
 </style>
 </head>
 <body>
 
-<div id="smoke"></div>
+<div id="bg"></div>
 
 <header>
-  <h1>Nolannax</h1>
-  <p>Voici tous mes sites web 🚀</p>
+  <h1>NOLANNAX</h1>
+  <p>Bienvenue sur mon univers — Sites, projets & créations 🚀</p>
 </header>
 
+<nav>
+  <a href="#">Accueil</a>
+  <a href="#">Projets</a>
+  <a href="#">Chaîne</a>
+  <a href="#">Contact</a>
+</nav>
+
 <div class="container">
-  <div class="card" data-url="https://teampingpongfr.netlify.app/">
+
+  <div class="card">
     <h3>Team PingPong FR</h3>
     <p>Communauté ping‑pong — actualités & tournois.</p>
     <div class="status">En ligne 🌐</div>
-   <a class="btn" href="https://teampingpongfr.netlify.app/" target="_blank">Voir le site</a>
+    <a class="btn" href="https://teampingpongfr.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card" data-url="https://numerixa.netlify.app/">
+  <div class="card">
     <h3>Numérixa</h3>
     <p>Cours et exercices de maths pour tous niveaux.</p>
     <div class="status">En ligne 🌐</div>
-    <a class="btn" href="https://numerixa.netlify.app/" target="_blank">Voir le site</a>
+    <a class="btn" href="https://numerixa.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card" data-url="https://tuneflowradio.netlify.app/">
+  <div class="card">
     <h3>TuneFlow Radio</h3>
     <p>Streaming radio & playlists.</p>
     <div class="status">En ligne 🌐</div>
-    <a class="btn" href="https://tuneflowradio.netlify.app/" target="_blank">Voir le site</a>
+    <a class="btn" href="https://tuneflowradio.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card" data-url="https://catatracker.netlify.app/">
+  <div class="card">
     <h3>CataTracker</h3>
     <p>Suivi de projets & gestion en temps réel.</p>
     <div class="status">En ligne 🌐</div>
-    <a class="btn" href="https://catatracker.netlify.app/" target="_blank">Voir le site</a>
+    <a class="btn" href="https://catatracker.netlify.app/" target="_blank">Visiter</a>
   </div>
 
-  <div class="card" data-url="">
+  <div class="card">
     <h3>Retournetoi</h3>
     <p>Jeu interactif en ligne.</p>
-    <div class="status">Hors Ligne ❌</div>
-    <a class="btn" href="" target="_blank">Voir le site</a>
+    <div class="status">Hors ligne ❌</div>
+    <a class="btn" href="#">Indisponible</a>
   </div>
 
-  <div class="card" data-url="https://nolannaxstudio.netlify.app/">
+  <div class="card">
     <h3>Nolannax Studio</h3>
     <p>Hub jeux & créations numériques.</p>
     <div class="status">En ligne 🌐</div>
-    <a class="btn" href="https://nolannaxstudio.netlify.app/" target="_blank">Voir le site</a>
+    <a class="btn" href="https://nolannaxstudio.netlify.app/" target="_blank">Visiter</a>
   </div>
+
 </div>
 
-<footer>© 2025 – Portfolio de mes créations</footer>
+<footer>© 2025 – Nolannax Network</footer>
 
-<!-- Pas de JS nécessaire, tous les boutons pointent directement vers les sites -->
 </body>
 </html>
-
-
-
-
