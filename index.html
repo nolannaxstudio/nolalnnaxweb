@@ -192,7 +192,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch(url)
+    // Proxy pour contourner Netlify CORS
+    const proxyUrl = "https://corsproxy.io/?";
+
+    fetch(proxyUrl + encodeURIComponent(url))
       .then(res => res.text())
       .then(html => {
         if (
